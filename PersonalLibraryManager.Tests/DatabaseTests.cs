@@ -43,5 +43,78 @@ namespace PersonalLibraryManager.Tests
                 Assert.Equal("Test Book", books[0].Title);
             }
         }
+
+        [Fact]
+        public void Can_Add_Author_To_Database()
+        {
+            var options = new DbContextOptionsBuilder<LibraryDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestAuthorDb")
+                .Options;
+
+            using (var context = new LibraryDbContext(options))
+            {
+                context.Authors.Add(new Author { Name = "Stephen King" });
+                context.SaveChanges();
+            }
+
+            using (var context = new LibraryDbContext(options))
+            {
+                var authors = context.Authors.ToList();
+                Assert.Single(authors);
+                Assert.Equal("Stephen King", authors[0].Name);
+            }
+        }
+
+        [Fact]
+        public void Can_Add_Genre_To_Database()
+        {
+            var options = new DbContextOptionsBuilder<LibraryDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestGenreDb")
+                .Options;
+
+            using (var context = new LibraryDbContext(options))
+            {
+                context.Genres.Add(new Genre { Name = "Horror" });
+                context.SaveChanges();
+            }
+
+            using (var context = new LibraryDbContext(options))
+            {
+                var genres = context.Genres.ToList();
+                Assert.Single(genres);
+                Assert.Equal("Horror", genres[0].Name);
+            }
+        }
+
+        [Fact]
+        public void Can_Delete_Author_From_Database()
+        {
+            var options = new DbContextOptionsBuilder<LibraryDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDeleteDb")
+                .Options;
+
+            int authorId;
+
+            using (var context = new LibraryDbContext(options))
+            {
+                var author = new Author { Name = "To Be Deleted" };
+                context.Authors.Add(author);
+                context.SaveChanges();
+                authorId = author.Id;
+            }
+
+            using (var context = new LibraryDbContext(options))
+            {
+                var authorToDelete = context.Authors.Find(authorId);
+                context.Authors.Remove(authorToDelete);
+                context.SaveChanges();
+            }
+
+            using (var context = new LibraryDbContext(options))
+            {
+                var count = context.Authors.Count();
+                Assert.Equal(0, count);
+            }
+        }
     }
 }
