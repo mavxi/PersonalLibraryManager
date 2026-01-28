@@ -5,11 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalLibraryManager"
         mc:Ignorable="d"
-        Title="Personal Library Manager" Height="300" Width="400">
-    <StackPanel Margin="20">
-        <Button Content="Manage Books" Click="OpenBooks" Height="30" Margin="0,5"/>
-        <Button Content="Manage Authors" Click="OpenAuthors" Height="30" Margin="0,5"/>
-        <Button Content="Manage Genres" Click="OpenGenres" Height="30" Margin="0,5"/>
-        <Button Content="About" Click="OpenAbout" Height="30" Margin="0,5"/>
-    </StackPanel>
+        WindowStartupLocation="CenterScreen"
+        Title="Personal Library Manager" Height="500" Width="500">
+    <Grid Margin="30">
+        <Border Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="40">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" Opacity="0.1" BlurRadius="15" ShadowDepth="0"/>
+            </Border.Effect>
+
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Library Manager" FontSize="28" Foreground="{StaticResource PrimaryBrush}" FontWeight="Light" Margin="0,0,0,40"/>
+
+                <Button Content="Manage Books" Click="OpenBooks" Style="{StaticResource ModernButton}" Width="200" Margin="0,5"/>
+                <Button Content="Manage Authors" Click="OpenAuthors" Style="{StaticResource ModernButton}" Width="200" Margin="0,5"/>
+                <Button Content="Manage Genres" Click="OpenGenres" Style="{StaticResource ModernButton}" Width="200" Margin="0,5"/>
+
+                <Separator Margin="0,25,0,25" Background="#E0E0E0"/>
+
+                <Button Content="About" Click="OpenAbout" Width="200" Background="Transparent" Foreground="#7F8C8D">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource ModernButton}" TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#F0F0F0"/>
+                                    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>

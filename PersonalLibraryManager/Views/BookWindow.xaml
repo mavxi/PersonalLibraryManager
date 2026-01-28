@@ -5,54 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalLibraryManager.Views"
         mc:Ignorable="d"
-        Title="Books" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Books" Height="500" Width="850">
+    <Grid Margin="30">
+        <Border Background="{StaticResource SurfaceBrush}" CornerRadius="8" Padding="25">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" Opacity="0.05" BlurRadius="10" ShadowDepth="0"/>
+            </Border.Effect>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
-                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="100"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <DataGridTemplateColumn Header="Author" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Author.Name}" Margin="5"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.Authors, RelativeSource={RelativeSource AncestorType=Window}}"
-                          DisplayMemberPath="Name"
-                          SelectedItem="{Binding Author, UpdateSourceTrigger=PropertyChanged}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                <TextBlock Grid.Row="0" Text="Manage Books" FontSize="20" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,0,15" FontWeight="SemiBold"/>
 
-                <DataGridTemplateColumn Header="Genre" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Genre.Name}" Margin="5"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.Genres, RelativeSource={RelativeSource AncestorType=Window}}"
-                          DisplayMemberPath="Name"
-                          SelectedItem="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid Grid.Row="1" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
+                        <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="100"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Add" Command="{Binding AddCommand}" Width="80" Margin="5"/>
-            <Button Content="Save" Command="{Binding SaveCommand}" Width="80" Margin="5"/>
-            <Button Content="Delete" Command="{Binding DeleteCommand}" Width="80" Margin="5"/>
-        </StackPanel>
+                        <DataGridTemplateColumn Header="Author" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Author.Name}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.Authors, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              DisplayMemberPath="Name"
+                                              SelectedItem="{Binding Author, UpdateSourceTrigger=PropertyChanged}"
+                                              Margin="0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Genre" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Genre.Name}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.Genres, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              DisplayMemberPath="Name"
+                                              SelectedItem="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"
+                                              Margin="0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ModernButton}" Width="90" Margin="5"/>
+                    <Button Content="Save" Command="{Binding SaveCommand}" Style="{StaticResource ModernButton}" Width="90" Margin="5"/>
+                    <Button Content="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource DangerButton}" Width="90" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

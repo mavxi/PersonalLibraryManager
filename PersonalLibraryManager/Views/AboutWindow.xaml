@@ -5,10 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalLibraryManager.Views"
         mc:Ignorable="d"
-        Title="About" Height="150" Width="300">
-    <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Text="Personal Library Manager" FontWeight="Bold" FontSize="16"/>
-        <TextBlock Text="Version 1.0" Margin="0,10"/>
-        <TextBlock Text="2026 "/>
-    </StackPanel>
+        Title="About" Height="300" Width="400">
+    <Border Background="{StaticResource SurfaceBrush}" CornerRadius="8" BorderThickness="1" BorderBrush="#E0E0E0">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" Opacity="0.2" BlurRadius="15" ShadowDepth="0"/>
+        </Border.Effect>
+
+        <StackPanel Margin="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Personal Library Manager" FontSize="18" Foreground="{StaticResource PrimaryBrush}" FontWeight="SemiBold"/>
+
+            <Rectangle Height="1" Fill="{StaticResource AccentBrush}" Width="50" Margin="0,15"/>
+
+            <TextBlock Text="Version 2.0" Foreground="#7F8C8D" Margin="0,5"/>
+            <TextBlock Text="© 2026" Foreground="#95A5A6" Margin="0,20"/>
+
+            <Button Content="Close" Click="Close_Click" Width="80" Style="{StaticResource ModernButton}"/>
+        </StackPanel>
+    </Border>
 </Window>

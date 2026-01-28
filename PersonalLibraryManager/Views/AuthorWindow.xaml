@@ -5,23 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalLibraryManager.Views"
         mc:Ignorable="d"
-        Title="Authors" Height="300" Width="400">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Authors" Height="400" Width="500">
+    <Grid Margin="30">
+        <Border Background="{StaticResource SurfaceBrush}" CornerRadius="8" Padding="20">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" Opacity="0.05" BlurRadius="10" ShadowDepth="0"/>
+            </Border.Effect>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Add" Command="{Binding AddCommand}" Width="80" Margin="5"/>
-            <Button Content="Save" Command="{Binding SaveCommand}" Width="80" Margin="5"/>
-            <Button Content="Delete" Command="{Binding DeleteCommand}" Width="80" Margin="5"/>
-        </StackPanel>
+                <TextBlock Grid.Row="0" Text="Manage Authors" FontSize="20" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,0,15" FontWeight="SemiBold"/>
+
+                <DataGrid Grid.Row="1" ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Author Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ModernButton}" Width="90" Margin="5"/>
+                    <Button Content="Save" Command="{Binding SaveCommand}" Style="{StaticResource ModernButton}" Width="90" Margin="5"/>
+                    <Button Content="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource DangerButton}" Width="90" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
